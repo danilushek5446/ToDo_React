@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { editToDo, setEditable } from '../app/slice/todoSlice';
+import { editToDo, setEditable } from '../../app/slice/todoSlice';
+import './ToDoItems.css'
 
 function ToDoItems({ todo, removeTask, toggleCheck }) {
   const [currentValue, setCurrentValue] = useState(todo.task);
   const dispatch = useDispatch();
   if (!todo.edit) {
-
-    const makeEditableTodo = (id) => {
-      dispatch(setEditable(id));
+    const makeEditableTodo = () => {
+      dispatch(setEditable(todo.id));
+    }
+    const deleteTask = () => {
+      removeTask(todo.id);
     }
 
     return (
-      <div key={todo.id}>
+      <div key={todo.id} className='todo-item'>
         <input
+          className='toggle'
           type="checkbox"
           onChange={() => toggleCheck(todo.id)}
           checked={todo.complete}
         />
-        <span onDoubleClick={() => makeEditableTodo(todo.id)}>{todo.task}</span>
-        <button onClick={() => removeTask(todo.id)}>x</button>
+        <label htmlFor='toggle' className='label-checkbox'></label>
+        <span className='todo-item__text' onDoubleClick={makeEditableTodo}>{todo.task}</span>
+        <button className='destroy' onClick={deleteTask}>x</button>
       </div>
     );
   } else {
@@ -36,12 +41,22 @@ function ToDoItems({ todo, removeTask, toggleCheck }) {
       }));
     }
 
+    const onBlur = () => {
+      dispatch(editToDo({
+        id: todo.id,
+        value: currentValue,
+      }));
+    }
+
     return (
-      <form key={todo.id} onSubmit={onSubmit}>
+      <form key={todo.id} onSubmit={onSubmit} className='todo-item'>
         <input
+          className='todo_edit'
           type='text'
           value={currentValue}
           onChange={onInpuChange}
+          onBlur={onBlur}
+          autoFocus
         />
       </form>
     );

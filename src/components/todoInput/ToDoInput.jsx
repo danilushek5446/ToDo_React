@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { checkAll } from '../app/slice/todoSlice';
+import { checkAll } from '../../app/slice/todoSlice';
+import './ToDoInput.css'
 
 function ToDoInput({ todo, addToDo }) {
   const [input, setInput] = useState('');
@@ -27,10 +28,11 @@ function ToDoInput({ todo, addToDo }) {
   }
 
   return (
-    <form className="App" onSubmit={onSubmit}>
-      <input type="checkbox" checked={isCheked} onChange={checkAllChange} />
-      <label htmlFor="togle-all"></label>
+    <form className="todo-input" onSubmit={onSubmit}>
+      <input type="checkbox" className='togle-all' checked={isCheked} onChange={checkAllChange} />
+      <label htmlFor="togle-all" className='togle-all-label'>❯</label>
       <input
+        className='new-todo'
         value={input}
         type="text"
         placeholder='What needs to be done?'
