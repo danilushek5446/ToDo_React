@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { checkAll } from '../../app/slice/todoSlice';
+import { checkAll } from '../../store/slice/todoSlice';
 import './ToDoInput.css'
 
 function ToDoInput({ todo, addToDo }) {
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
-  let isCheked = false;
-
-  if (todo.filter(element => element.complete).length === todo.length && todo.length) {
-    isCheked = true;
-  }
+  const isCheked = useMemo(() => {
+    return todo.filter(element => element.complete).length === todo.length && todo.length
+  }, [todo]);
 
   const onInpuChange = (event) => {
     setInput(event.target.value);
@@ -29,13 +27,18 @@ function ToDoInput({ todo, addToDo }) {
 
   return (
     <form className="todo-input" onSubmit={onSubmit}>
-      <input type="checkbox" className='togle-all' checked={isCheked} onChange={checkAllChange} />
-      <label htmlFor="togle-all" className='togle-all-label'>❯</label>
       <input
-        className='new-todo'
+        type="checkbox"
+        className="togle-all"
+        checked={isCheked}
+        onChange={checkAllChange}
+      />
+      <label htmlFor="togle-all" className="togle-all-label">❯</label>
+      <input
+        className="new-todo"
         value={input}
         type="text"
-        placeholder='What needs to be done?'
+        placeholder="What needs to be done?"
         onChange={onInpuChange}
       />
     </form>

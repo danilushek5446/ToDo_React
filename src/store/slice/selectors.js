@@ -1,7 +1,7 @@
 import { createSelector } from "reselect"
 
-export const selectAllTodos = state => state.todo.todoList
-export const selectActiveFilter = state => state.filters
+export const selectAllTodos = state => state.todo.todoList;
+export const selectActiveFilter = state => state.todo.filter;
 
 export const selectTodoByFilter = createSelector(
   [selectAllTodos, selectActiveFilter],

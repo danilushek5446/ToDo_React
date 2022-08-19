@@ -2,21 +2,23 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ToDoFooter from '../todoFooter/ToDoFooter';
 import ToDoInput from '../todoInput/ToDoInput';
-import ToDoItems from '../todoItems/ToDoItems';
-import { addToDo, changeCompletion, removeToDo } from '../../app/slice/todoSlice'
-import { selectTodoByFilter } from '../../app/slice/selectors';
+import { addToDo, changeCompletion, removeToDo } from '../../store/slice/todoSlice'
+import { selectTodoByFilter } from '../../store/slice/selectors';
 import './ToDoForm.css'
+import ToDoItemEdit from '../todoItems/ToDoItemEdit';
+import ToDoItemNoEdit from '../todoItems/ToDoItemNoEdit';
 
 function ToDoForm() {
 
   const dispatch = useDispatch();
-  const toDo = useSelector(selectTodoByFilter)
-  const allToDo = useSelector(state => state.todo.todoList);
+  const toDos = useSelector(selectTodoByFilter)
+  const allToDos = useSelector(state => state.todo.todoList);
 
   const addNewToDo = (inputValue) => {
-    if (inputValue) {
-      dispatch(addToDo(inputValue));
+    if (!inputValue) {
+      return;
     }
+    dispatch(addToDo(inputValue));
   };
 
   const removeTask = (id) => {
@@ -29,22 +31,28 @@ function ToDoForm() {
 
   return (
     <div className="todo-app">
-      <div className='todo-title'>todos</div>
+      <div className="todo-title">todos</div>
       <ToDoInput
-        todo={toDo}
+        todo={toDos}
         addToDo={addNewToDo}
       />
-      {toDo.map((todo) => {
+      {toDos.map((todo) => {
         return (
-          <ToDoItems
-            todo={todo}
-            key={todo.id}
-            removeTask={removeTask}
-            toggleCheck={toggleCheck}
-          />
+          todo.edit ?
+            <ToDoItemEdit
+              todo={todo}
+              key={todo.id}
+            />
+            :
+            <ToDoItemNoEdit
+              todo={todo}
+              key={todo.id}
+              removeTask={removeTask}
+              toggleCheck={toggleCheck}
+            />
         )
       })}
-      {allToDo.length !== 0 && <ToDoFooter />}
+      {allToDos.length !== 0 && <ToDoFooter />}
     </div>
   );
 }

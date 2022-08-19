@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 export const todoSlice = createSlice({
   name: 'todo',
   initialState: {
-    todoList: []
+    todoList: [],
+    filter: 'all',
   },
   reducers: {
     addToDo: (state, action) => {
@@ -45,6 +46,10 @@ export const todoSlice = createSlice({
       state.todoList[index].task = action.payload.value;
       state.todoList[index].edit = false;
     },
+    
+    changeFilter: (state, action) => {
+      state.filter = action.payload;
+    },
 
   }
 })
@@ -58,6 +63,7 @@ export const {
   checkAll,
   setEditable,
   editToDo,
+  changeFilter,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;
