@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter } from '../../store/slice/todoSlice';
-import { deleteAllCompleted } from '../../store/slice/todoSlice'
+import { changeFilter, deleteAllCompleted } from '../../store/slice/todoSlice';
+import { selectAllTodos, selectActiveFilter } from "../../store/slice/selectors";
 import './ToDoFooter.css'
 
 function ToDoFooter() {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.todo.filter);
-  const todos = useSelector(state => state.todo.todoList)
+  const filter = useSelector(selectActiveFilter);
+  const todos = useSelector(selectAllTodos)
   const countActive = useMemo(() => {
     return todos.filter(element => !element.complete).length;
   }, [todos])

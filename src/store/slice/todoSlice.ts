@@ -1,14 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { State, todoItem, changeTodo } from '../../Interfaces';
+
+export const initialState: State = {
+  todoList: [],
+  filter: 'all',
+};
 
 export const todoSlice = createSlice({
   name: 'todo',
-  initialState: {
-    todoList: [],
-    filter: 'all',
-  },
+  initialState,
   reducers: {
-    addToDo: (state, action) => {
-      const newItem = {
+    addToDo: (state, action: PayloadAction<string>) => {
+      const newItem: todoItem = {
         id: Date.now(),
         task: action.payload,
         complete: false,
@@ -17,37 +20,37 @@ export const todoSlice = createSlice({
       state.todoList.push(newItem);
     },
 
-    removeToDo: (state, action) => {
+    removeToDo: (state, action:PayloadAction<number>) => {
       state.todoList = state.todoList.filter(todo => todo.id !== action.payload);
     },
 
-    changeCompletion: (state, action) => {
+    changeCompletion: (state, action:PayloadAction<number>) => {
       const index = state.todoList.findIndex(todo => todo.id === action.payload);
       state.todoList[index].complete = !state.todoList[index].complete;
     },
 
-    deleteAllCompleted: (state, action) => {
+    deleteAllCompleted: (state) => {
       state.todoList = state.todoList.filter(todo => !todo.complete);
     },
 
-    checkAll: (state, action) => {
+    checkAll: (state, action:PayloadAction<boolean>) => {
       state.todoList.forEach(todo => {
         todo.complete = action.payload;
       });
     },
 
-    setEditable: (state, action) => {
+    setEditable: (state, action:PayloadAction<number>) => {
       const index = state.todoList.findIndex(todo => todo.id === action.payload);
       state.todoList[index].edit = true;
     },
 
-    editToDo: (state, action) => {
-      const index = state.todoList.findIndex(todo => todo.id === action.payload.id);
+    editToDo: (state, action: PayloadAction<changeTodo>) => {
+      const index: number = state.todoList.findIndex(todo => todo.id === action.payload.id);
       state.todoList[index].task = action.payload.value;
       state.todoList[index].edit = false;
     },
-    
-    changeFilter: (state, action) => {
+
+    changeFilter: (state, action:PayloadAction<string>) => {
       state.filter = action.payload;
     },
 
@@ -58,7 +61,6 @@ export const {
   addToDo,
   removeToDo,
   changeCompletion,
-  getActiveCount,
   deleteAllCompleted,
   checkAll,
   setEditable,

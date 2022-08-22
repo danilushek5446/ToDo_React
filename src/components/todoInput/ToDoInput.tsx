@@ -2,26 +2,32 @@ import React, { useMemo } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkAll } from '../../store/slice/todoSlice';
+import { todoItem } from '../../Interfaces';
 import './ToDoInput.css'
 
-function ToDoInput({ todo, addToDo }) {
+type PropTypes = {
+  todos: todoItem[];
+  addToDo(value: string): void;
+};
+
+const ToDoInput: React.FC<PropTypes> = ({ todos, addToDo }) => {
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
   const isCheked = useMemo(() => {
-    return todo.every(element => element.complete)
-  }, [todo]);
+    return todos.every(element => element.complete)
+  }, [todos]);
 
-  const onInpuChange = (event) => {
+  const onInpuChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     addToDo(input);
     setInput('');
   }
 
-  const checkAllChange = (event) => {
+  const checkAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(checkAll(event.target.checked))
   }
 

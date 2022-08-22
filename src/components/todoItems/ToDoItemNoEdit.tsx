@@ -1,9 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setEditable } from '../../store/slice/todoSlice';
-import './ToDoItems.css'
+import { todoItem } from '../../Interfaces';
+import './ToDoItems.css';
 
-function ToDoItemNoEdit({ todo, removeTask, toggleCheck }) {
+type PropTypes = {
+  todo: todoItem;
+  removeTask(id: number): void;
+  toggleCheck(id: number): void;
+};
+
+const ToDoItemNoEdit: React.FC<PropTypes>  = ({ todo, removeTask, toggleCheck }) => {
   const dispatch = useDispatch();
   const makeEditableTodo = () => {
     dispatch(setEditable(todo.id));

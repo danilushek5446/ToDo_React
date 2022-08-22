@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editToDo } from '../../store/slice/todoSlice';
+import { todoItem } from '../../Interfaces';
 import './ToDoItems.css'
 
-function ToDoItemEdit({ todo }) {
+type PropTypes = {
+  todo: todoItem;
+};
+
+const ToDoItemEdit: React.FC<PropTypes> = ({ todo }) => {
   const [currentValue, setCurrentValue] = useState(todo.task);
   const dispatch = useDispatch();
 
-  const onInpuChange = (event) => {
+  const onInpuChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentValue(event.target.value)
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(editToDo({
       id: todo.id,
