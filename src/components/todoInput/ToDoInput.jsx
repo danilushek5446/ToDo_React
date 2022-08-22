@@ -8,7 +8,7 @@ function ToDoInput({ todo, addToDo }) {
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
   const isCheked = useMemo(() => {
-    return todo.filter(element => element.complete).length === todo.length && todo.length
+    return todo.every(element => element.complete)
   }, [todo]);
 
   const onInpuChange = (event) => {
