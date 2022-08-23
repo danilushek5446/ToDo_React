@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter, deleteAllCompleted } from '../../store/slice/todoSlice';
 import { selectAllTodos, selectActiveFilter } from "../../store/slice/selectors";
-import './ToDoFooter.css'
+import { FiltersDiv, FooterCountSpan, FooterDiv, DeleteAllButton } from './ToDoFooter.styles';
 
 function ToDoFooter() {
   const dispatch = useDispatch();
@@ -15,9 +15,9 @@ function ToDoFooter() {
   const countComplited = todos.length - countActive;
 
   return (
-    <div className="footer">
-      <span className="todo-count">{countActive} item left</span>
-      <div className="filters">
+    <FooterDiv className="footer">
+      <FooterCountSpan className="todo-count">{countActive} item left</FooterCountSpan>
+      <FiltersDiv className="filters">
         <button className={filter === "all" ? "active" : ""}
           onClick={() => dispatch(changeFilter("all"))}>All
         </button>
@@ -27,11 +27,13 @@ function ToDoFooter() {
         <button className={filter === "completed" ? "active" : ""}
           onClick={() => dispatch(changeFilter("completed"))}>Completed
         </button>
-      </div>
+      </FiltersDiv>
       {
-        countComplited > 0 && <button className="delete-all" onClick={() => dispatch(deleteAllCompleted())}>Clear completed</button>
+        countComplited > 0
+        &&
+        <DeleteAllButton className="delete-all" onClick={() => dispatch(deleteAllCompleted())}>Clear completed </DeleteAllButton>
       }
-    </div>
+    </FooterDiv>
   );
 }
 
