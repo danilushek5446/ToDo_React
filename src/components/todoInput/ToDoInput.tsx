@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { checkAll } from '../../store/slice/todoSlice';
 import { todoItem } from '../../Interfaces';
 import { StyledNewToDoInput, StyledToDoInputForm, StyledToDoTogleAllInput, StyledToDoTogleAllLabel } from './ToDoInput.styles';
+import { useAppDispatch } from '../../store/hooks';
 
 type PropTypes = {
   todos: todoItem[];
@@ -12,7 +12,7 @@ type PropTypes = {
 
 const ToDoInput: React.FC<PropTypes> = ({ todos, addToDo }) => {
   const [input, setInput] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isCheked = useMemo(() => {
     return todos.every(element => element.complete)
   }, [todos]);

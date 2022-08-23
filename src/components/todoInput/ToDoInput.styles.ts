@@ -5,13 +5,13 @@ export const StyledToDoInputForm = styled.form<{ isChecked: boolean }>`
   box-shadow: inset 0 -2px 1px rgb(0 0 0 / 3%);
   label {
     font-size: 22px;
-    color: #e6e6e6;
+    color: ${({theme}) => theme.colors.logo};
   }
   ${({ isChecked }) => {
     if (isChecked) {
       return css`
         label {
-          color: #737373;
+          color: ${({theme}) => theme.colors.activeAll};
         }
       `
     }
@@ -33,7 +33,7 @@ export const StyledToDoTogleAllInput = styled.input`
 export const StyledToDoTogleAllLabel = styled.label`
   cursor: default;
   font-size: 22px;
-  color: #e6e6e6;
+  color: ${({theme}) => theme.colors.highligth};
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 `;

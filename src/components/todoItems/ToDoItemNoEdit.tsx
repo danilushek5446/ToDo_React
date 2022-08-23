@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { setEditable } from '../../store/slice/todoSlice';
 import { todoItem } from '../../Interfaces';
 import { StyledCheckboxLabel, StyledDestroyButton, StyledTodoItemDiv, StyledTodoItemSpan, StyledToggleInput } from './ToDoItems.styles';
+import { useAppDispatch } from '../../store/hooks';
 
 type PropTypes = {
   todo: todoItem;
@@ -11,7 +11,7 @@ type PropTypes = {
 };
 
 const ToDoItemNoEdit: React.FC<PropTypes>  = ({ todo, removeTask, toggleCheck }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const makeEditableTodo = () => {
     dispatch(setEditable(todo.id));
   }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import ToDoFooter from '../todoFooter/ToDoFooter';
 import ToDoInput from '../todoInput/ToDoInput';
 import { addToDo, changeCompletion, removeToDo } from '../../store/slice/todoSlice';
@@ -9,12 +8,13 @@ import ToDoItemNoEdit from '../todoItems/ToDoItemNoEdit';
 import { todoItem } from '../../Interfaces';
 import { selectAllTodos } from '../../store/slice/selectors';
 import { StyledToDoFormDiv, StyledTodoTitleDiv } from './ToDoForm.styles';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const ToDoForm: React.FC = () => {
 
-  const dispatch = useDispatch();
-  const toDos: todoItem[] = useSelector(selectTodoByFilter)
-  const allToDos: todoItem[] = useSelector(selectAllTodos);
+  const dispatch = useAppDispatch();
+  const toDos: todoItem[] = useAppSelector(selectTodoByFilter)
+  const allToDos: todoItem[] = useAppSelector(selectAllTodos);
 
   const addNewToDo = (inputValue: string) => {
     if (!inputValue) {

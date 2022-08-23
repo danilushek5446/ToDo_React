@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { editToDo } from '../../store/slice/todoSlice';
 import { todoItem } from '../../Interfaces';
 import { StyledTodoItemForm, StyledToDoTextInput } from './ToDoItems.styles';
+import { useAppDispatch } from '../../store/hooks';
 
 type PropTypes = {
   todo: todoItem;
@@ -10,7 +10,7 @@ type PropTypes = {
 
 const ToDoItemEdit: React.FC<PropTypes> = ({ todo }) => {
   const [currentValue, setCurrentValue] = useState(todo.task);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onInpuChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentValue(event.target.value)

@@ -10,7 +10,6 @@ export const StyledFooterContainerDiv = styled.div`
 `;
 
 export const StyledFooterDiv = styled.div`
-  color: #777;
   padding: 10px 15px;
   height: 20px;
   text-align: center;
@@ -52,11 +51,11 @@ export const StyledFiltersDiv = styled.div`
   background: none;
   }
   button:hover {
-  border-color: rgba(175, 47, 47, 0.2);
+  border-color: ${({theme}) => theme.colors.highligth};
   border-radius: 3px;
   }
   .active {
-  border-color: rgba(175, 47, 47, 0.2);
+  border-color: ${({theme}) => theme.colors.highligth};
   border-radius: 3px;
   }
 
