@@ -1,7 +1,7 @@
 import React from 'react';
 import ToDoForm from './components/todoForm/ToDoForm';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className='app'>
       <ToDoForm />

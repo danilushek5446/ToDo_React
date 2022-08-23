@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkAll } from '../../store/slice/todoSlice';
 import { todoItem } from '../../Interfaces';
-import './ToDoInput.css'
+import { StyledNewToDoInput, StyledToDoInputForm, StyledToDoTogleAllInput, StyledToDoTogleAllLabel } from './ToDoInput.styles';
 
 type PropTypes = {
   todos: todoItem[];
@@ -32,22 +32,26 @@ const ToDoInput: React.FC<PropTypes> = ({ todos, addToDo }) => {
   }
 
   return (
-    <form className="todo-input" onSubmit={onSubmit}>
-      <input
+    <StyledToDoInputForm
+      isChecked={isCheked}
+      className="todo-input"
+      onSubmit={onSubmit}
+    >
+      <StyledToDoTogleAllInput
         type="checkbox"
         className="togle-all"
         checked={isCheked}
         onChange={checkAllChange}
       />
-      <label htmlFor="togle-all" className="togle-all-label">❯</label>
-      <input
+      {(todos.length !== 0) && <StyledToDoTogleAllLabel htmlFor="togle-all" className="togle-all-label">❯</StyledToDoTogleAllLabel>}
+      <StyledNewToDoInput
         className="new-todo"
         value={input}
         type="text"
         placeholder="What needs to be done?"
         onChange={onInpuChange}
       />
-    </form>
+    </StyledToDoInputForm>
   );
 }
 

@@ -1,10 +1,24 @@
+import styled, { css } from "styled-components";
 
-.todo-input{
+export const StyledToDoInputForm = styled.form<{ isChecked: boolean }>`
   display: flex;
   box-shadow: inset 0 -2px 1px rgb(0 0 0 / 3%);
-}
+  label {
+    font-size: 22px;
+    color: #e6e6e6;
+  }
+  ${({ isChecked }) => {
+    if (isChecked) {
+      return css`
+        label {
+          color: #737373;
+        }
+      `
+    }
+  }}
+`;
 
-.togle-all {
+export const StyledToDoTogleAllInput = styled.input`
   top: 16px;
   left: 10px;
   width: 30px;
@@ -14,32 +28,17 @@
   opacity: 0;
   position: absolute;
   z-index: 999;
-}
+`;
 
-.togle-all:checked + .togle-all-label {
-  color: #737373;
-}
-
-.togle-all-label {
+export const StyledToDoTogleAllLabel = styled.label`
   cursor: default;
   font-size: 22px;
   color: #e6e6e6;
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
-}
+`;
 
-
-.toggle-all+label:before {
-  font-size: 22px;
-  color: #e6e6e6;
-  padding: 10px 27px 10px 27px;
-}
-
-.toggle-all:checked + label:before {
-	color: #737373;
-}
-
-.new-todo {
+export const StyledNewToDoInput = styled.input`
   padding-top: 16px;
   padding-bottom: 16px;
   margin-left: 40px;
@@ -55,8 +54,7 @@
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   outline: none;
-}
-
-.new-todo::placeholder{
-  opacity: 20%;
-}
+  ::placeholder{
+    opacity: 20%;
+  }
+`;

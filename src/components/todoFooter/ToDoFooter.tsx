@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter, deleteAllCompleted } from '../../store/slice/todoSlice';
 import { selectAllTodos, selectActiveFilter } from "../../store/slice/selectors";
-import { FiltersDiv, FooterCountSpan, FooterDiv, DeleteAllButton } from './ToDoFooter.styles';
+import { StyledFiltersDiv, StyledFooterCountSpan, StyledFooterDiv, StyledDeleteAllButton, StyledFooterContainerDiv } from './ToDoFooter.styles';
 
-function ToDoFooter() {
+const ToDoFooter: React.FC = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectActiveFilter);
   const todos = useSelector(selectAllTodos)
@@ -15,25 +15,27 @@ function ToDoFooter() {
   const countComplited = todos.length - countActive;
 
   return (
-    <FooterDiv className="footer">
-      <FooterCountSpan className="todo-count">{countActive} item left</FooterCountSpan>
-      <FiltersDiv className="filters">
-        <button className={filter === "all" ? "active" : ""}
-          onClick={() => dispatch(changeFilter("all"))}>All
-        </button>
-        <button className={filter === "active" ? "active" : ""}
-          onClick={() => dispatch(changeFilter("active"))}>Active
-        </button>
-        <button className={filter === "completed" ? "active" : ""}
-          onClick={() => dispatch(changeFilter("completed"))}>Completed
-        </button>
-      </FiltersDiv>
-      {
-        countComplited > 0
-        &&
-        <DeleteAllButton className="delete-all" onClick={() => dispatch(deleteAllCompleted())}>Clear completed </DeleteAllButton>
-      }
-    </FooterDiv>
+    <StyledFooterContainerDiv className="footer-container">
+      <StyledFooterDiv className="footer">
+        <StyledFooterCountSpan className="todo-count">{countActive} item left</StyledFooterCountSpan>
+        <StyledFiltersDiv className="filters">
+          <button className={filter === "all" ? "active" : ""}
+            onClick={() => dispatch(changeFilter("all"))}>All
+          </button>
+          <button className={filter === "active" ? "active" : ""}
+            onClick={() => dispatch(changeFilter("active"))}>Active
+          </button>
+          <button className={filter === "completed" ? "active" : ""}
+            onClick={() => dispatch(changeFilter("completed"))}>Completed
+          </button>
+        </StyledFiltersDiv>
+        {
+          countComplited > 0
+          &&
+          <StyledDeleteAllButton className="delete-all" onClick={() => dispatch(deleteAllCompleted())}>Clear completed </StyledDeleteAllButton>
+        }
+      </StyledFooterDiv>
+    </StyledFooterContainerDiv>
   );
 }
 

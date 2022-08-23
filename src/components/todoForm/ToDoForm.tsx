@@ -4,13 +4,13 @@ import ToDoFooter from '../todoFooter/ToDoFooter';
 import ToDoInput from '../todoInput/ToDoInput';
 import { addToDo, changeCompletion, removeToDo } from '../../store/slice/todoSlice';
 import { selectTodoByFilter } from '../../store/slice/selectors';
-import './ToDoForm.css';
 import ToDoItemEdit from '../todoItems/ToDoItemEdit';
 import ToDoItemNoEdit from '../todoItems/ToDoItemNoEdit';
 import { todoItem } from '../../Interfaces';
 import { selectAllTodos } from '../../store/slice/selectors';
+import { StyledToDoFormDiv, StyledTodoTitleDiv } from './ToDoForm.styles';
 
-function ToDoForm() {
+const ToDoForm: React.FC = () => {
 
   const dispatch = useDispatch();
   const toDos: todoItem[] = useSelector(selectTodoByFilter)
@@ -32,8 +32,8 @@ function ToDoForm() {
   };
 
   return (
-    <div className="todo-app">
-      <div className="todo-title">todos</div>
+    <StyledToDoFormDiv className="todo-app">
+      <StyledTodoTitleDiv className="todo-title">todos</StyledTodoTitleDiv>
       <ToDoInput
         todos={toDos}
         addToDo={addNewToDo}
@@ -55,7 +55,7 @@ function ToDoForm() {
         )
       })}
       {allToDos.length !== 0 && <ToDoFooter />}
-    </div>
+    </StyledToDoFormDiv>
   );
 }
 

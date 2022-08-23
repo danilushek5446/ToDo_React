@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setEditable } from '../../store/slice/todoSlice';
 import { todoItem } from '../../Interfaces';
-import './ToDoItems.css';
+import { StyledCheckboxLabel, StyledDestroyButton, StyledTodoItemDiv, StyledTodoItemSpan, StyledToggleInput } from './ToDoItems.styles';
 
 type PropTypes = {
   todo: todoItem;
@@ -25,17 +25,20 @@ const ToDoItemNoEdit: React.FC<PropTypes>  = ({ todo, removeTask, toggleCheck })
   }
 
   return (
-    <div key={todo.id} className="todo-item">
-      <input
+    <StyledTodoItemDiv
+    checked={todo.complete}
+    key={todo.id} 
+    className="todo-item">
+      <StyledToggleInput
         className="toggle"
         type="checkbox"
         onChange={changeCheck}
         checked={todo.complete}
       />
-      <label htmlFor="toggle" className="label-checkbox"></label>
-      <span className="todo-item__text" onDoubleClick={makeEditableTodo}>{todo.task}</span>
-      <button className="destroy" onClick={deleteTask}>x</button>
-    </div>
+      <StyledCheckboxLabel htmlFor="toggle" className="label-checkbox"></StyledCheckboxLabel>
+      <StyledTodoItemSpan className="todo-item__text" onDoubleClick={makeEditableTodo}>{todo.task}</StyledTodoItemSpan>
+      <StyledDestroyButton className="destroy" onClick={deleteTask}>x</StyledDestroyButton>
+    </StyledTodoItemDiv>
   );
 
 }

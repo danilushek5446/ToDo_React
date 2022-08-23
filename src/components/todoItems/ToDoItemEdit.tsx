@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editToDo } from '../../store/slice/todoSlice';
 import { todoItem } from '../../Interfaces';
-import './ToDoItems.css'
+import { StyledTodoItemForm, StyledToDoTextInput } from './ToDoItems.styles';
 
 type PropTypes = {
   todo: todoItem;
@@ -32,11 +32,11 @@ const ToDoItemEdit: React.FC<PropTypes> = ({ todo }) => {
   }
 
   return (
-    <form
+    <StyledTodoItemForm
       key={todo.id}
       onSubmit={onSubmit}
       className="todo-item">
-      <input
+      <StyledToDoTextInput
         className="todo_edit"
         type="text"
         value={currentValue}
@@ -44,7 +44,7 @@ const ToDoItemEdit: React.FC<PropTypes> = ({ todo }) => {
         onBlur={onBlur}
         autoFocus
       />
-    </form>
+    </StyledTodoItemForm>
   );
 }
 
