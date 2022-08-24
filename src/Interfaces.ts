@@ -1,4 +1,4 @@
-export interface todoItem {
+export interface TodoItem {
   id: number;
   task: string;
   complete: boolean;
@@ -7,11 +7,11 @@ export interface todoItem {
 }
 
 export interface State {
-  todoList: todoItem[];
+  todoList: TodoItem[];
   filter: string;
 }
 
-export interface changeTodo {
+export interface ChangeTodo {
   id: number;
   value: string;
 }

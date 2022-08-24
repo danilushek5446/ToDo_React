@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { State, todoItem, changeTodo } from '../../Interfaces';
+import { State, TodoItem, ChangeTodo } from '../../Interfaces';
 
 export const initialState: State = {
   todoList: [],
@@ -11,7 +11,7 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {
     addToDo: (state, action: PayloadAction<string>) => {
-      const newItem: todoItem = {
+      const newItem: TodoItem = {
         id: Date.now(),
         task: action.payload,
         complete: false,
@@ -44,7 +44,7 @@ export const todoSlice = createSlice({
       state.todoList[index].edit = true;
     },
 
-    editToDo: (state, action: PayloadAction<changeTodo>) => {
+    editToDo: (state, action: PayloadAction<ChangeTodo>) => {
       const index: number = state.todoList.findIndex(todo => todo.id === action.payload.id);
       state.todoList[index].task = action.payload.value;
       state.todoList[index].edit = false;

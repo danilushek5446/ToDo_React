@@ -9,7 +9,8 @@ const myTheme: DefaultTheme = {
     logo: '#e6e6e6',
     delete: '#cc9a9a;',
     border: '#ededed',
-    activeAll: '#737373'
+    activeAll: '#737373',
+    boxShadow: 'f6f6f6'
   },
 };
 

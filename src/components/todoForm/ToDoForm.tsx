@@ -5,7 +5,7 @@ import { addToDo, changeCompletion, removeToDo } from '../../store/slice/todoSli
 import { selectTodoByFilter } from '../../store/slice/selectors';
 import ToDoItemEdit from '../todoItems/ToDoItemEdit';
 import ToDoItemNoEdit from '../todoItems/ToDoItemNoEdit';
-import { todoItem } from '../../Interfaces';
+import { TodoItem } from '../../Interfaces';
 import { selectAllTodos } from '../../store/slice/selectors';
 import { StyledToDoFormDiv, StyledTodoTitleDiv } from './ToDoForm.styles';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -13,8 +13,8 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 const ToDoForm: React.FC = () => {
 
   const dispatch = useAppDispatch();
-  const toDos: todoItem[] = useAppSelector(selectTodoByFilter)
-  const allToDos: todoItem[] = useAppSelector(selectAllTodos);
+  const toDos: TodoItem[] = useAppSelector(selectTodoByFilter)
+  const allToDos: TodoItem[] = useAppSelector(selectAllTodos);
 
   const addNewToDo = (inputValue: string) => {
     if (!inputValue) {

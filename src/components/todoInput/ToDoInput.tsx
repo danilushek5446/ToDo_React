@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { useState } from 'react';
 import { checkAll } from '../../store/slice/todoSlice';
-import { todoItem } from '../../Interfaces';
+import { TodoItem } from '../../Interfaces';
 import { StyledNewToDoInput, StyledToDoInputForm, StyledToDoTogleAllInput, StyledToDoTogleAllLabel } from './ToDoInput.styles';
 import { useAppDispatch } from '../../store/hooks';
 
 type PropTypes = {
-  todos: todoItem[];
+  todos: TodoItem[];
   addToDo(value: string): void;
 };
 

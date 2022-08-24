@@ -11,6 +11,7 @@ declare module 'styled-components' {
       delete: string;
       border: string;
       activeAll: string;
+      boxShadow: string;
     };
   }
 }

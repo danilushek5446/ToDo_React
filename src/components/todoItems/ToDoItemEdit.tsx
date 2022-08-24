@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { editToDo } from '../../store/slice/todoSlice';
-import { todoItem } from '../../Interfaces';
+import { TodoItem } from '../../Interfaces';
 import { StyledTodoItemForm, StyledToDoTextInput } from './ToDoItems.styles';
 import { useAppDispatch } from '../../store/hooks';
 
 type PropTypes = {
-  todo: todoItem;
+  todo: TodoItem;
 };
 
 const ToDoItemEdit: React.FC<PropTypes> = ({ todo }) => {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { setEditable } from '../../store/slice/todoSlice';
-import { todoItem } from '../../Interfaces';
+import { TodoItem } from '../../Interfaces';
 import { StyledCheckboxLabel, StyledDestroyButton, StyledTodoItemDiv, StyledTodoItemSpan, StyledToggleInput } from './ToDoItems.styles';
 import { useAppDispatch } from '../../store/hooks';
 
 type PropTypes = {
-  todo: todoItem;
+  todo: TodoItem;
   removeTask(id: number): void;
   toggleCheck(id: number): void;
 };
